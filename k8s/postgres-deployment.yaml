@@ -15,7 +15,7 @@ spec:
       volumes:
         - name: postgres-storage
           persistentVolumeClaim:
-              claimName: database-persistent-volume-claim
+            claimName: database-persistent-volume-claim
       containers:
         - name: postgres
           image: postgres
@@ -28,6 +28,6 @@ spec:
           env:
             - name: PGPASSWORD
               valueFrom:
-                  secretKeyRef:
-                    name: pgpassword
-                    key: PGPASSWORD
+                secretKeyRef:
+                  name: pgpassword
+                  key: PGPASSWORD
