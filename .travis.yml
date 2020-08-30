@@ -16,11 +16,13 @@ before_install:
   - gcloud config set project avid-setting-287617
   - gcloud config set compute/zone europe-west3-a
   - gcloud container clusters get-credentials multi-cluster
-  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
   - docker build -t lincwest/react-test -f ./client/Dockerfile.dev .client
 
 script:
   - docker run -e CI=true lincwest/react-test npm test -- --coverage
+
+after_success:
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
 
 deploy:
   provider: script
